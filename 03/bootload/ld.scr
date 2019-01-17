@@ -1,0 +1,39 @@
+SECTIONS{
+	.stack : {
+		. = 0x80000;
+		_stack = . ;
+	}
+
+	.text : {
+		_text_start = . ;
+		*(.text)
+		_etext = . ;
+	}
+
+	.rodata : {
+		_rodata_start = . ;
+		*(.strings)
+		*(.rodata)
+		*(.rodata.*)
+		_erodata = . ;
+	}
+	
+	.data : {
+		_data_start = . ;
+		*(.data)
+		_edata = . ;
+	}
+
+	.bss : {
+		_bss_start = . ;
+		*(.bss)
+		*(COMMON)
+		_ebss = . ;
+	}
+
+
+	. = ALIGN(16);
+	_end = . ;
+
+
+}
