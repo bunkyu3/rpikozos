@@ -1,5 +1,6 @@
 #include "serial.h"
 #include "lib.h"
+#include "utils.h"
 
 static int init(void){
 	extern int _erodata, _data_start, _edata, _bss_start, _ebss;
@@ -27,6 +28,11 @@ static void printval(void){
 
 int main(void){
 	init();
+	unsigned int p;
+	p = get_el();
+	puts("Exception level is ");
+	putxval(p,0); 	puts("\n");
+
 	puts("Hello World!\n");
 	
 	printval();
