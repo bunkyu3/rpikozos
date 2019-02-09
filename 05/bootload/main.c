@@ -3,6 +3,7 @@
 #include "xmodem.h"
 #include "elf.h"
 #include "lib.h"
+#include "utils.h"
 
 static int init(void){
 	extern int _bss_start, _ebss;
@@ -47,6 +48,10 @@ int main(void){
 	extern int _buffer_start;
 
 	init();
+	unsigned int p;
+	p = get_el();
+	puts("Exception level is ");
+	putxval(p,0);   puts("\n");
 	puts("kzload (kozos boot loader) started.\n");
 	
 	while(1){
