@@ -1,4 +1,4 @@
-#include "sysregs.h"
+#include "arm/sysregs.h"
 
 .section .text
 .global _start
