@@ -1,6 +1,7 @@
 #include "peripherals/gpio.h"
 #include "peripherals/serial.h"
 #include "serial.h"
+#include "lib.h"
 
 int serial_init(void){
 	unsigned int r;
@@ -23,7 +24,7 @@ int serial_init(void){
 	/* initialize UART */
 	*AUX_ENABLE |=1;				// enable UART1
 	*AUX_MU_CNTL = 0;				// disable Tx, Rx
-	*AUX_MU_IER = 0;				// disable Tx, Rx interrupt
+	*AUX_MU_IER = 0xfd;				// enable Rx interrupt
 	*AUX_MU_LCR = 3;				// 8bits mode
 	*AUX_MU_IIR = 0xc6;				// clear receive, transmit FIFO
 	*AUX_MU_BAUD = 270;				// 115200 baud
@@ -57,4 +58,10 @@ char serial_recv_byte(){
 	c = (char)(*AUX_MU_IO);
 
 	return c;
+}
+
+void handle_serial(void){
+	char c;
+	c = getc();
+	putc(c);
 }

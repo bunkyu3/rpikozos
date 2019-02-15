@@ -17,6 +17,9 @@ _start:
 	// if cpu id==0
 master:
 	// switch EL2 to EL1
+	ldr		x0, =SCTLR_VALUE_MMU_DISABLED
+	msr		sctlr_el1, x0
+
 	ldr		x0, =HCR_VALUE
 	msr		hcr_el2, x0
 
