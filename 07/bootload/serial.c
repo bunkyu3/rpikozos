@@ -59,7 +59,3 @@ char serial_recv_byte(){
 
 	return c;
 }
-
-void handle_serial(void){
-	getc();
-}

@@ -1,5 +1,5 @@
-#ifndef _BOOT_H
-#define _BOOT_H
+#ifndef _UTILS_H_INCLUDED_
+#define _UTILS_H_INCLUDED_
 
 int get_el(void);
 

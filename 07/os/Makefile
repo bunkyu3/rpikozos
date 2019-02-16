@@ -15,6 +15,7 @@ STRIP	= $(BINDIR)/$(ADDNAME)strip
 
 OBJS  = startup.o main.o
 OBJS += lib.o serial.o
+OBJS += vector.o intr.o interrupt.o
 
 TARGET	= rpikozos
 

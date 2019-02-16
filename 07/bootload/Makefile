@@ -16,7 +16,7 @@ STRIP	= $(BINDIR)/$(ADDNAME)strip
 OBJS  = startup.o main.o
 OBJS += lib.o serial.o xmodem.o elf.o
 OBJS += utils.o
-OBJS += vector.o irq.o intr.o
+OBJS += vector.o intr.o interrupt.o
 
 TARGET	= kernel8
 

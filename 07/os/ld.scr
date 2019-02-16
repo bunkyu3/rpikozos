@@ -2,11 +2,20 @@ MEMORY{
 	ramall(rwx)	: o = 0x000000, l = 0xffffff /* 16MB */
 	stack(rw)	: o = 0x080000, l = 0x000000
 	boot(rwx)	: o = 0x080000, l = 0x010000 /* 64KB */
-	os(rwx)		: o = 0x090000, l = 0x080000 /* 512KB */
+	softvec(rw)	: o = 0x090000, l = 0x010000 /* 64KB */
+	os(rwx)		: o = 0x0a0000, l = 0x080000 /* 512KB */
 	buffer(rwx)	: o = 0xf00000, l = 0x0fffff /* 1MB */
 }
 
 SECTIONS{
+	.stack : {
+		_stack = . ;
+	} > stack
+
+	.softvec : {
+		_softvec = . ;
+	} > softvec
+
 	.text : {
 		_text_start = . ;
 		*(.text)
@@ -25,7 +34,7 @@ SECTIONS{
 		_data_start = . ;
 		*(.data)
 		_edata = . ;
-	} > os 
+	} > os
 
 	.bss : {
 		_bss_start = . ;

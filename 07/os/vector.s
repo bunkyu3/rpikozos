@@ -1,5 +1,5 @@
 .align 11
-.globl vectors
+.global vectors
 vectors:
 	.align	7
 	b		invalid

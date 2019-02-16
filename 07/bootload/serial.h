@@ -6,6 +6,5 @@ int serial_is_send_enable();
 int serial_send_byte(char b);
 int serial_is_recv_enable();
 char serial_recv_byte();
-void handle_serial();
 
 #endif

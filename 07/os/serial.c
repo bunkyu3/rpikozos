@@ -58,3 +58,7 @@ char serial_recv_byte(){
 
 	return c;
 }
+
+void serial_intr_recv_enable(){
+	*AUX_MU_IIR = *AUX_MU_IIR | 0xfd;
+}
