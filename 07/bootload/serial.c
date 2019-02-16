@@ -61,7 +61,5 @@ char serial_recv_byte(){
 }
 
 void handle_serial(void){
-	char c;
-	c = getc();
-	putc(c);
+	getc();
 }
