@@ -1,0 +1,55 @@
+MEMORY{
+	ramall(rwx)	: o = 0x000000, l = 0xffffff /* 16MB */
+
+	boot(rwx)	: o = 0x080000, l = 0x010000 /* 64KB */
+	softvec(rw)	: o = 0x090000, l = 0x010000 /* 64KB */
+	buffer(rwx)	: o = 0x0a0000, l = 0x060000 /* 393KB */
+	os(rwx)		: o = 0x100000, l = 0x100000 /* 512KB */
+	stack(rw)	: o = 0x200000, l = 0x000000 
+}
+
+SECTIONS{
+
+	.text : {
+		_text_start = . ;
+		*(.text)
+		_etext = . ;
+	} > boot 
+
+	.rodata : {
+		_rodata_start = . ;
+		*(.strings)
+		*(.rodata)
+		*(.rodata.*)
+		_erodata = . ;
+	} > boot
+	
+	.data : {
+		_data_start = . ;
+		*(.data)
+		_edata = . ;
+	} > boot
+
+	.bss : {
+		_bss_start = . ;
+		*(.bss)
+		*(COMMON)
+		_ebss = . ;
+	} > boot
+
+	.softvec : {
+		_softvec = . ;
+	} > softvec
+
+	.buffer : {
+		_buffer_start = . ;
+	} > buffer
+
+	. = ALIGN(16);
+	_end = . ;
+
+	.stack : {
+		_stack = . ;
+	} > stack
+
+}
