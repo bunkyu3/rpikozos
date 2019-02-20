@@ -29,7 +29,7 @@ static void intr(softvec_type_t type, unsigned long sp){
 }
 
 int main(void){
-	disable_irq();
+	INTR_DISABLE;
 
 	puts("kozos boot succeed!\n");
 
@@ -40,8 +40,7 @@ int main(void){
 
 	puts("> ");
 
-	enable_irq();
-
+	INTR_ENABLE;
 	volatile long i;
 	while(1){
 		for(i=0; i<3000000; i++)

@@ -10,6 +10,9 @@ typedef void (*softvec_handler_t)(softvec_type_t type, unsigned long sp);
 
 #define SOFTVECS ((softvec_handler_t *)SOFTVEC_ADDR)
 
+#define INTR_ENABLE asm volatile ("msr daifclr, #7")	// SError and IRQ
+#define INTR_DISABLE asm volatile ("msr daifset, #7")	// SError and IRQ
+
 int softvec_init(void);
 
 int softvec_setintr(softvec_type_t type, softvec_handler_t handler);
