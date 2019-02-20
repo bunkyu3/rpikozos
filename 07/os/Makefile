@@ -13,9 +13,8 @@ OBJDUMP	= $(BINDIR)/$(ADDNAME)objdump
 RANLIB	= $(BINDIR)/$(ADDNAME)ranlib
 STRIP	= $(BINDIR)/$(ADDNAME)strip
 
-OBJS  = startup.o main.o
+OBJS  = startup.o main.o interrupt.o
 OBJS += lib.o serial.o
-OBJS += vector.o intr.o interrupt.o
 
 TARGET	= rpikozos
 
