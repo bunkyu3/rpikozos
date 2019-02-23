@@ -87,7 +87,7 @@ static void thread_init(kz_thread *thp){
 static kz_thread_id_t thread_run(kz_func_t func, char *name,
 								int stacksize, int argc, char *argv[]){
 	puts("thread_run begin\n");
-/*
+
 	int i;
 	kz_thread *thp;
 	uint64 *sp;
@@ -120,9 +120,8 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 	// *(--sp) = (uint64)thread_end;
 
 	// *(--sp) = (uint64)thread_init;
-*/
 	set_elr_el1((uint64)thread_init);
-/*
+
 	*(--sp) = 0; // X30
 	*(--sp) = 0; // X29
 	*(--sp) = 0; // X28
@@ -164,8 +163,6 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 	putcurrent();
 
 	return (kz_thread_id_t)current;
-*/
-	return 0;
 }
 
 static int thread_exit(void){
