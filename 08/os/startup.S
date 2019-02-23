@@ -1,3 +1,5 @@
+#include "arm/sysregs.h"
+
 	.section .text
 	.global _start
 _start:
@@ -43,5 +45,10 @@ dispatch:
  	ldr x30, [sp, #16 * 15]
  	add sp, sp, 256
 */
+	ldr		x0, =SPSR_VALUE
+	msr		spsr_el1, x0
+
+	adr		x0, _start
+	msr		elr_el1, x0
 	eret
 

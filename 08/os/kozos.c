@@ -121,7 +121,9 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 
 	// *(--sp) = (uint64)thread_init;
 */
-	set_elr_el1((uint64 *)thread_init);
+	uint64 volatile addr = (uint64)thread_init;
+	addr = get_spsr_el1();
+	puts("prev: "); putxval(addr, 0); putc('\n');
 
 /*
 	*(--sp) = 0; // X30
@@ -234,6 +236,11 @@ static void softerr_intr(void){
 
 static void thread_intr(softvec_type_t type, unsigned long sp){
 	puts("thread_intr\n");
+	unsigned long addr;
+	addr = get_esr_el1();
+	puts("esr_el1: "); putxval(addr, 0); puts("\n");
+
+
 	current->context.sp = sp;
 
 	if(handlers[type])
