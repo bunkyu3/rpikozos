@@ -42,7 +42,7 @@ static kz_thread *current;
 static kz_thread threads[THREAD_NUM];
 static kz_handler_t handlers[SOFTVEC_TYPE_NUM];
 
-void dispatch(kz_context *context);
+unsigned long dispatch(kz_context *context);
 
 static int getcurrent(void){
 	if(current == NULL){
@@ -102,6 +102,7 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 	if(i == THREAD_NUM)
 		return -1;
 	
+	puts("thp   "); putxval(thp,0); puts("\n");
 	memset(thp, 0, sizeof(*thp));
 
 	strcpy(thp->name, name);
@@ -264,7 +265,9 @@ void kz_start(kz_func_t func, char *name, int stacksize,
 	putxval(&current->context, 0); puts("\n");
 	putxval(current->context.sp, 0); puts("\n");
 
-	dispatch(&current->context);
+	unsigned long addr;
+	addr = dispatch(&current->context);
+	puts("in dis"); putxval(addr, 0); puts("\n");
 }
 
 void kz_sysdown(void){
