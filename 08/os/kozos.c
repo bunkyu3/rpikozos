@@ -118,10 +118,12 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 
 	sp = (uint64 *)thp->stack;
 	// *(--sp) = (uint64)thread_end;
+	putxval(sp,0); puts("\n");
 
 	// *(--sp) = (uint64)thread_init;
 	set_elr_el1((uint64)thread_init);
 
+	--sp;
 	*(--sp) = 0; // X30
 	*(--sp) = 0; // X29
 	*(--sp) = 0; // X28
@@ -258,6 +260,9 @@ void kz_start(kz_func_t func, char *name, int stacksize,
 	setintr(SOFTVEC_TYPE_SOFTERR, softerr_intr);
 
 	current = (kz_thread *)thread_run(func, name, stacksize, argc, argv);
+
+	putxval(&current->context, 0); puts("\n");
+	putxval(current->context.sp, 0); puts("\n");
 
 	dispatch(&current->context);
 }
