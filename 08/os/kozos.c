@@ -121,10 +121,7 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 
 	// *(--sp) = (uint64)thread_init;
 */
-	uint64 volatile addr = (uint64)thread_init;
-	addr = get_spsr_el1();
-	puts("prev: "); putxval(addr, 0); putc('\n');
-
+	set_elr_el1((uint64)thread_init);
 /*
 	*(--sp) = 0; // X30
 	*(--sp) = 0; // X29

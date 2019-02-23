@@ -48,7 +48,5 @@ dispatch:
 	ldr		x0, =SPSR_VALUE
 	msr		spsr_el1, x0
 
-	adr		x0, _start
-	msr		elr_el1, x0
 	eret
 
