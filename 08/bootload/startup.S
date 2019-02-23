@@ -30,7 +30,7 @@ master:
 
 el1_entry:
 	// set stack pointor
-	ldr		x1, =_start
+	ldr		x1, =_bootstack
 	mov		sp, x1
 	// jump to C code
 	bl		main

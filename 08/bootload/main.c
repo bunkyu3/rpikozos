@@ -59,7 +59,7 @@ int main(void){
 	void (*f)(void);
 	extern int _buffer_start;
 
-	disable_irq();
+	INTR_DISABLE;
 
 	init();
 

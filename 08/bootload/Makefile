@@ -13,10 +13,10 @@ OBJDUMP	= $(BINDIR)/$(ADDNAME)objdump
 RANLIB	= $(BINDIR)/$(ADDNAME)ranlib
 STRIP	= $(BINDIR)/$(ADDNAME)strip
 
-OBJS  = startup.o main.o
+OBJS  = startup.o vector.o intr.o  main.o interrupt.o
 OBJS += lib.o serial.o xmodem.o elf.o
+
 OBJS += utils.o
-OBJS += vector.o intr.o interrupt.o
 
 TARGET	= kernel8
 

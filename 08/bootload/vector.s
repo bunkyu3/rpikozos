@@ -15,7 +15,7 @@ vectors:
 
 
 	.align	7
-	b		invalid
+	b		intr_syscall
 
 	.align	7
 	b		intr_serintr
