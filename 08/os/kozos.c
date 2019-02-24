@@ -102,7 +102,6 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 	if(i == THREAD_NUM)
 		return -1;
 	
-	puts("thp   "); putxval(thp,0); puts("\n");
 	memset(thp, 0, sizeof(*thp));
 
 	strcpy(thp->name, name);
@@ -232,8 +231,6 @@ static void softerr_intr(void){
 
 static void thread_intr(softvec_type_t type, unsigned long sp){
 	puts("thread_intr\n");
-	puts("type is: "); putxval(type, 0); puts("\n");
-
 
 	current->context.sp = sp;
 
@@ -259,9 +256,6 @@ void kz_start(kz_func_t func, char *name, int stacksize,
 
 	current = (kz_thread *)thread_run(func, name, stacksize, argc, argv);
 
-	putxval(&current->context, 0); puts("\n");
-	putxval(current->context.sp, 0); puts("\n");
-
 	dispatch(&current->context);
 	
 }
@@ -273,6 +267,7 @@ void kz_sysdown(void){
 }
 
 void kz_syscall(kz_syscall_type_t type, kz_syscall_param_t *param){
+	puts("kz_syscall begin\n");
 	current->syscall.type = type;
 	current->syscall.param = param;
 	asm volatile ("svc #0");

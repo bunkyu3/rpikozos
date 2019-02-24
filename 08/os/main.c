@@ -4,6 +4,7 @@
 #include "lib.h"
 
 static int start_threads(int argc, char *argv[]){
+	puts("start_threads begin\n");
 	kz_run(test08_1_main, "command", 0x300, 0, NULL);
 	return 0;
 }
