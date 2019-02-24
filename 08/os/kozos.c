@@ -119,12 +119,15 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 	thp->stack = thread_stack;
 
 	sp = (uint64 *)thp->stack;
+	puts(" sp=(uint64 *)thp->stack:");putxval(sp,0);puts("\n");
 	// *(--sp) = (uint64)thread_end;
-
+	--sp;
+	puts(" --sp:");putxval(sp,0);puts("\n");
 	*(--sp) = (uint64)thread_init;
+	puts(" *(--sp)=(uint64)thread_init:");putxval(sp,0);puts("\n");
 	//set_elr_el1((uint64)thread_init);
 
-	*(--sp) = 0; // X30
+//	*(--sp) = 0; // X30
 	*(--sp) = 0; // X29
 	*(--sp) = 0; // X28
 	*(--sp) = 0; // X27
@@ -155,7 +158,9 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 	*(--sp) = 0; // X2
 	*(--sp) = 0; // X1
 
+	puts(" *(--sp)=0 // X1:");putxval(sp,0);puts("\n");
 	*(--sp) = (uint64)thp;
+	puts(" *(--sp)=(uint64)thp:");putxval(sp,0);puts("\n");
 
 	thp->context.sp = (uint64)sp;
 
@@ -257,6 +262,7 @@ void kz_start(kz_func_t func, char *name, int stacksize,
 	setintr(SOFTVEC_TYPE_SOFTERR, softerr_intr);
 
 	current = (kz_thread *)thread_run(func, name, stacksize, argc, argv);
+	puts(" current=(kz_thre... :");putxval(current->context.sp,0);puts("\n");
 
 	dispatch(&current->context);
 	
