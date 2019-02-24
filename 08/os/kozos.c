@@ -42,7 +42,7 @@ static kz_thread *current;
 static kz_thread threads[THREAD_NUM];
 static kz_handler_t handlers[SOFTVEC_TYPE_NUM];
 
-unsigned long dispatch(kz_context *context);
+void dispatch(kz_context *context);
 
 static int getcurrent(void){
 	if(current == NULL){
@@ -119,7 +119,6 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 
 	sp = (uint64 *)thp->stack;
 	// *(--sp) = (uint64)thread_end;
-	putxval(sp,0); puts("\n");
 
 	// *(--sp) = (uint64)thread_init;
 	set_elr_el1((uint64)thread_init);
@@ -233,9 +232,7 @@ static void softerr_intr(void){
 
 static void thread_intr(softvec_type_t type, unsigned long sp){
 	puts("thread_intr\n");
-	unsigned long addr;
-	addr = get_esr_el1();
-	puts("esr_el1: "); putxval(addr, 0); puts("\n");
+	puts("type is: "); putxval(type, 0); puts("\n");
 
 
 	current->context.sp = sp;
@@ -265,9 +262,8 @@ void kz_start(kz_func_t func, char *name, int stacksize,
 	putxval(&current->context, 0); puts("\n");
 	putxval(current->context.sp, 0); puts("\n");
 
-	unsigned long addr;
-	addr = dispatch(&current->context);
-	puts("in dis"); putxval(addr, 0); puts("\n");
+	dispatch(&current->context);
+	
 }
 
 void kz_sysdown(void){
