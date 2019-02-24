@@ -119,10 +119,9 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 	sp = (uint64 *)thp->stack;
 	// *(--sp) = (uint64)thread_end;
 
-	// *(--sp) = (uint64)thread_init;
-	set_elr_el1((uint64)thread_init);
+	*(--sp) = (uint64)thread_init;
+	//set_elr_el1((uint64)thread_init);
 
-	--sp;
 	*(--sp) = 0; // X30
 	*(--sp) = 0; // X29
 	*(--sp) = 0; // X28

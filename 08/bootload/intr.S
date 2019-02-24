@@ -20,6 +20,10 @@ intr_syscall:
 	stp	x26, x27, [sp, #16 * 13]
 	stp	x28, x29, [sp, #16 * 14]
 	str	x30, [sp, #16 * 15]
+
+	mrs		x0, elr_el1
+	str		x0, [sp, #16 * 16]
+
 	mov	x1, sp
 
 	ldr	x2, =_intrstack
