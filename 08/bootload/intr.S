@@ -19,10 +19,9 @@ intr_syscall:
 	stp	x24, x25, [sp, #16 * 12]
 	stp	x26, x27, [sp, #16 * 13]
 	stp	x28, x29, [sp, #16 * 14]
-	str	x30, [sp, #16 * 15]
 
 	mrs		x0, elr_el1
-	str		x0, [sp, #16 * 16]
+	str		x0, [sp, #16 * 15]
 
 	mov	x1, sp
 
@@ -49,7 +48,6 @@ intr_syscall:
 	ldp	x24, x25, [sp, #16 * 12]
 	ldp	x26, x27, [sp, #16 * 13]
 	ldp	x28, x29, [sp, #16 * 14]
-	ldr	x30, [sp, #16 * 15]
 	add	sp, sp, 256
 	eret
 
