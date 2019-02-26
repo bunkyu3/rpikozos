@@ -182,7 +182,7 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name, int priority,
 }
 
 static int thread_exit(void){
-	puts("thread_exit\n");
+	//puts("thread_exit\n");
 	puts(current->name);
 	puts(" EXIT.\n");
 	memset(current, 0, sizeof(*current));
@@ -234,7 +234,7 @@ static int setintr(softvec_type_t type, kz_handler_t handler){
 }
 
 static void call_functions(kz_syscall_type_t type, kz_syscall_param_t *p){
-	puts("call_functions\n");
+	//puts("call_functions\n");
 	switch(type){
 		case KZ_SYSCALL_TYPE_RUN:
 			p->un.run.ret = thread_run(p->un.run.func, p->un.run.name,
@@ -265,7 +265,7 @@ static void call_functions(kz_syscall_type_t type, kz_syscall_param_t *p){
 }
 
 static void syscall_proc(kz_syscall_type_t type, kz_syscall_param_t *p){
-	puts("syscall_proc\n");
+	//puts("syscall_proc\n");
 	getcurrent();
 	call_functions(type, p);
 }
@@ -284,12 +284,12 @@ static void schedule(void){
 }
 
 static void syscall_intr(void){
-	puts("syscall_intr\n");
+	//puts("syscall_intr\n");
 	syscall_proc(current->syscall.type, current->syscall.param);
 }
 
 static void softerr_intr(void){
-	puts("softerr_intr\n");
+	//puts("softerr_intr\n");
 	puts(current->name);
 	puts(" DOWN.\n");
 	getcurrent();
@@ -297,7 +297,7 @@ static void softerr_intr(void){
 }
 
 static void thread_intr(softvec_type_t type, unsigned long sp){
-	puts("thread_intr\n");
+	//puts("thread_intr\n");
 
 	current->context.sp = sp;
 
