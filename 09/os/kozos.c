@@ -49,7 +49,7 @@ static kz_handler_t handlers[SOFTVEC_TYPE_NUM];
 void dispatch(kz_context *context);
 
 static int getcurrent(void){
-	puts("getcurrent\n");
+	//puts("getcurrent\n");
 	if(current == NULL){
 		return -1;
 	}
@@ -68,7 +68,7 @@ static int getcurrent(void){
 }
 
 static int putcurrent(void){
-	puts("putcurrent\n");
+	//puts("putcurrent\n");
 	if(current == NULL){
 		return -1;
 	}
@@ -88,7 +88,7 @@ static int putcurrent(void){
 }
 
 static void thread_end(void){
-	puts("thread_end\n");
+	//puts("thread_end\n");
 	kz_exit();
 }
 
