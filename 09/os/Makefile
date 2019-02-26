@@ -19,7 +19,7 @@ OBJS += lib.o serial.o
 OBJS += utils.o
 
 # sources of kozos
-OBJS += kozos.o syscall.o test08_1.o
+OBJS += kozos.o syscall.o test09_1.o test09_2.o test09_3.o
 
 TARGET	= rpikozos
 
