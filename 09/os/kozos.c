@@ -329,7 +329,7 @@ void kz_start(kz_func_t func, char *name, int priority, int stacksize,
 }
 
 void kz_sysdown(void){
-	puts("kz_sysdown\n");
+	//puts("kz_sysdown\n");
 	puts("system error!\n");
 	while(1)
 		;

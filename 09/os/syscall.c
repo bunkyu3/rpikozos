@@ -5,7 +5,7 @@
 
 kz_thread_id_t kz_run(kz_func_t func, char *name, int priority, int stacksize,
 						int argc, char *argv[]){
-	puts("kz_run\n");
+	//puts("kz_run\n");
 	kz_syscall_param_t param;
 	param.un.run.func = func;
 	param.un.run.name = name;
@@ -18,7 +18,7 @@ kz_thread_id_t kz_run(kz_func_t func, char *name, int priority, int stacksize,
 }
 
 void kz_exit(void){
-	puts("kz_exit\n");
+	//puts("kz_exit\n");
 	kz_syscall(KZ_SYSCALL_TYPE_EXIT, NULL);
 }
 
