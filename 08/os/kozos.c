@@ -60,7 +60,7 @@ static int getcurrent(void){
 }
 
 static int putcurrent(void){
-	puts("putcurrent\n");
+	//puts("putcurrent\n");
 	if(current == NULL){
 		return -1;
 	}
@@ -216,7 +216,7 @@ static void syscall_proc(kz_syscall_type_t type, kz_syscall_param_t *p){
 }
 
 static void schedule(void){
-	//puts("schedule\n");
+	puts("schedule\n");
 	if(!readyque.head)
 		kz_sysdown();
 	
@@ -246,6 +246,7 @@ static void thread_intr(softvec_type_t type, unsigned long sp){
 
 	schedule();
 
+	puts("current->context.sp "); putxval(current->context.sp, 0); puts("\n");
 	dispatch(&current->context);
 }
 
