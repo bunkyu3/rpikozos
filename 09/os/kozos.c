@@ -223,7 +223,7 @@ static int thread_chpri(int priority){
 static void thread_intr(softvec_type_t type, unsigned long sp);
 
 static int setintr(softvec_type_t type, kz_handler_t handler){
-	puts("setintr\n");
+	//puts("setintr\n");
 	/*prototype declaration inside a function is not allowed
 	  in the compiler, so declear "thread_intr" above this function*/
 	softvec_setintr(type, thread_intr);
@@ -311,7 +311,7 @@ static void thread_intr(softvec_type_t type, unsigned long sp){
 
 void kz_start(kz_func_t func, char *name, int priority, int stacksize,
 				int argc, char *argv[]){
-	puts("kz_start\n");
+	//puts("kz_start\n");
 	current = NULL;
 
 	memset(readyque, 0, sizeof(readyque));
@@ -322,7 +322,7 @@ void kz_start(kz_func_t func, char *name, int priority, int stacksize,
 	setintr(SOFTVEC_TYPE_SOFTERR, softerr_intr);
 
 	current = (kz_thread *)thread_run(func, name, priority, stacksize, argc, argv);
-	puts(" current=(kz_thre... :");putxval(current->context.sp,0);puts("\n");
+	//puts(" current=(kz_thre... :");putxval(current->context.sp,0);puts("\n");
 
 	dispatch(&current->context);
 	
@@ -336,7 +336,7 @@ void kz_sysdown(void){
 }
 
 void kz_syscall(kz_syscall_type_t type, kz_syscall_param_t *param){
-	puts("kz_syscall\n");
+	//puts("kz_syscall\n");
 	current->syscall.type = type;
 	current->syscall.param = param;
 	asm volatile ("svc #0");
