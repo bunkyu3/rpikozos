@@ -60,7 +60,7 @@ static int getcurrent(void){
 }
 
 static int putcurrent(void){
-	//puts("putcurrent\n");
+	puts("putcurrent\n");
 	if(current == NULL){
 		return -1;
 	}
