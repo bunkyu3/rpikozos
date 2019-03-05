@@ -3,9 +3,6 @@
 #include "interrupt.h"
 #include "peripherals/irq.h"
 
-#include "lib.h"
-#include "utils.h"
-
 int softvec_init(void){
 	int type;
 	for(type=0; type<SOFTVEC_TYPE_NUM; type++)
@@ -18,12 +15,7 @@ int softvec_setintr(softvec_type_t type, softvec_handler_t handler){
 	return 0;
 }
 
-void interrupt(softvec_type_t type, unsigned long sp)
-{
-	unsigned long addr;
-	addr = get_esr_el1;
-	puts("esr in interrupt() "); putxval(addr, 0); puts("\n"); 
-
+void interrupt(softvec_type_t type, unsigned long sp){
 	softvec_handler_t handler = SOFTVECS[type];
 	if(handler)
 		handler(type, sp);

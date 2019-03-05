@@ -120,11 +120,8 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 	thp->stack = thread_stack;
 
 	sp = (uint64 *)thp->stack;
-	puts(" sp=(uint64 *)thp->stack:");putxval(sp,0);puts("\n");
 	// *(--sp) = (uint64)thread_end;
-	puts(" --sp:");putxval(sp,0);puts("\n");
 	*(--sp) = (uint64)thread_init;
-	puts(" *(--sp)=(uint64)thread_init:");putxval(sp,0);puts("\n");
 	//set_elr_el1((uint64)thread_init);
 
 	*(--sp) = 0; // X30
@@ -158,9 +155,7 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name,
 	*(--sp) = 0; // X2
 	*(--sp) = 0; // X1
 
-	puts(" *(--sp)=0 // X1:");putxval(sp,0);puts("\n");
 	*(--sp) = (uint64)thp;
-	puts(" *(--sp)=(uint64)thp:");putxval(sp,0);puts("\n");
 
 	thp->context.sp = (uint64)sp;
 
@@ -276,7 +271,7 @@ void kz_sysdown(void){
 }
 
 void kz_syscall(kz_syscall_type_t type, kz_syscall_param_t *param){
-	//puts("kz_syscall\n");
+	puts("kz_syscall\n");
 	current->syscall.type = type;
 	current->syscall.param = param;
 	asm volatile ("svc #0");
