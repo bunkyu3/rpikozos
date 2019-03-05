@@ -43,6 +43,7 @@ static kz_thread threads[THREAD_NUM];
 static kz_handler_t handlers[SOFTVEC_TYPE_NUM];
 
 void dispatch(kz_context *context);
+unsigned long dispatch2(kz_context *context);
 
 static int getcurrent(void){
 	//puts("getcurrent\n");
@@ -240,6 +241,11 @@ static void thread_intr(softvec_type_t type, unsigned long sp){
 	//puts("thread_intr\n");
 
 	current->context.sp = sp;
+	puts("current->context.sp is"); putxval(current->context.sp, 0); puts("\n");
+
+	unsigned long addr;
+	addr = get_esr_el1();
+	puts("esr in thread_intr() before handler()"); putxval(addr, 0); puts("\n");
 
 	if(handlers[type])
 		handlers[type]();
@@ -247,7 +253,22 @@ static void thread_intr(softvec_type_t type, unsigned long sp){
 	schedule();
 
 	puts("current->context.sp "); putxval(current->context.sp, 0); puts("\n");
-	dispatch(&current->context);
+
+	addr = get_esr_el1();
+	puts("esr in thread_intr() before dispatch"); putxval(addr, 0); puts("\n");
+
+	//unsigned long spp;
+	//spp = dispatch2(&current->context);
+	//puts("spp in thread_intr()"); putxval(spp, 0); puts("\n");
+	
+	puts("new current->context.sp is"); putxval(current->context.sp, 0); puts("\n");
+
+	addr = dispatch2(&current->context);
+	puts("x0 in thread_intr() after dispatch"); putxval(addr, 0); puts("\n");
+
+	addr = get_esr_el1();
+	puts("esr in thread_intr() after dispatch"); putxval(addr, 0); puts("\n");
+	puts("after dispatch in thread_intr()\n");
 }
 
 void kz_start(kz_func_t func, char *name, int stacksize,

@@ -53,3 +53,12 @@ dispatch:
 
 	eret	
 
+	.global dispatch2
+dispatch2:
+	ldr		x0, [x0]
+	mov		sp, x0
+
+	ldr		x0, [sp, #16 * 15]
+	msr		elr_el1, x0
+
+	eret	
