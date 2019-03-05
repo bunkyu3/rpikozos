@@ -5,7 +5,7 @@
 
 kz_thread_id_t kz_run(kz_func_t func, char *name, int stacksize,
 						int argc, char *argv[]){
-	//puts("kz_run\n");
+	puts("kz_run\n");
 	kz_syscall_param_t param;
 	param.un.run.func = func;
 	param.un.run.name = name;

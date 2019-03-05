@@ -28,11 +28,10 @@ dispatch:
 	ldr		x0, [x0]
 	mov		sp, x0
 
-	ldr		x0, [sp, #16 * 15]
+	ldp		x30, x0, [sp, #16 * 15]
 	msr		elr_el1, x0
 	ldr		x1, =SPSR_VALUE
 	msr		spsr_el1, x1
-
 	ldp		x0, x1, [sp, #16 * 0]
 	ldp		x2, x3, [sp, #16 * 1]
 	ldp		x4, x5, [sp, #16 * 2]
@@ -48,7 +47,6 @@ dispatch:
 	ldp		x24, x25, [sp, #16 * 12]
  	ldp		x26, x27, [sp, #16 * 13]
  	ldp		x28, x29, [sp, #16 * 14]
- 	//ldr		x30, [sp, #16 * 15]
 	add		sp, sp, 256
 
 	eret	
