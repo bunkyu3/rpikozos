@@ -15,8 +15,7 @@ int softvec_setintr(softvec_type_t type, softvec_handler_t handler){
 	return 0;
 }
 
-void interrupt(softvec_type_t type, unsigned long sp)
-{
+void interrupt(softvec_type_t type, unsigned long sp){
 	softvec_handler_t handler = SOFTVECS[type];
 	if(handler)
 		handler(type, sp);

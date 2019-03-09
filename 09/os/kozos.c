@@ -134,11 +134,10 @@ static kz_thread_id_t thread_run(kz_func_t func, char *name, int priority,
 
 	sp = (uint64 *)thp->stack;
 	// *(--sp) = (uint64)thread_end;
-	--sp;
 	//*(--sp) = (uint64)thread_init | ((uint64)(priority ? 0 : 0xc0) << 24);
 	*(--sp) = (uint64)thread_init;
 
-//	*(--sp) = 0; // X30
+	*(--sp) = 0; // X30
 	*(--sp) = 0; // X29
 	*(--sp) = 0; // X28
 	*(--sp) = 0; // X27
@@ -325,7 +324,6 @@ void kz_start(kz_func_t func, char *name, int priority, int stacksize,
 	//puts(" current=(kz_thre... :");putxval(current->context.sp,0);puts("\n");
 
 	dispatch(&current->context);
-	
 }
 
 void kz_sysdown(void){
